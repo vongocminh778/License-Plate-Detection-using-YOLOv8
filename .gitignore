@@ -1,0 +1,8 @@
+__pycache__/*
+capture/plate_car.zip
+capture/predefined_classes.txt
+capture/plate_car/train/*
+number_plate_env/*
+capture/plate_car/val/*
+train21/*
+capture/labelImg/*
