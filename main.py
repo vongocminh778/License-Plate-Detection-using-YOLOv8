@@ -96,7 +96,9 @@ class ObjectDetection:
 
     def send_serial(self, run_event):
         try:
-            Ser = serial.Serial('COM3', 115200)
+            lst_plate = ['51F04877.', '51D10039.', '51F02687.', '51G10096.', '51A05227.', '51F59011.', '51A85325.', '51A60216.']
+            lst_alphabet = ['1', '2', '3', '4', '5', '6', '7', '8']
+            Ser = serial.Serial('COM4', 115200)
             time.sleep(2)
             connected = Ser.is_open
             if connected:
@@ -109,7 +111,15 @@ class ObjectDetection:
                     data = str(self.text_output) + "."
                     self.text_output = None
                 if connected and data != "None.":
-                    Ser.write(data.encode())
+                    # Find the index in lst_plate
+                    if data in lst_plate:
+                        index = lst_plate.index(data)
+                        data_write = lst_alphabet[index]
+                        Ser.write(data_write.encode())
+                        print(f"The index of data in lst_plate is: {data} - {data_write}")
+                    else:
+                        print("Data not found in lst_plate.")
+
                     time.sleep(0.5)
                     print("data: {}".format(data))
                 time.sleep(0.5)
